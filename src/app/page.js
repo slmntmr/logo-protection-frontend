@@ -1,48 +1,63 @@
 "use client";
 
 import { useState } from "react";
+import '../style/home.css'; // Home sayfası için özel stiller
 
 export default function Home() {
   const [file, setFile] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false); // Yükleme durumu için state
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Başvuru başlıyor
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("application", new Blob([JSON.stringify({
-      firstName,
-      lastName,
-      email,
-      applicationDetails: "Logo koruma başvurusu"
-    })], { type: "application/json" }));
+    formData.append(
+      "application",
+      new Blob(
+        [
+          JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            applicationDetails: "Logo koruma başvurusu",
+          }),
+        ],
+        { type: "application/json" }
+      )
+    );
 
     try {
-      const response = await fetch('http://localhost:8080/api/trademark/apply', {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await fetch(
+        "http://localhost:8080/api/trademark/apply",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         alert("Başvurunuz başarıyla alındı.");
       } else {
         const errorMessage = await response.text();
-        alert(`Başvuru sırasında bir hata oluştu: ${response.status} - ${errorMessage}`);
+        alert(
+          `Başvuru sırasında bir hata oluştu: ${response.status} - ${errorMessage}`
+        );
       }
     } catch (error) {
       alert(`Sunucuya erişilemedi: ${error.message}`);
+    } finally {
+      setLoading(false); // İşlem bittiğinde yükleme durumu sıfırlanır
     }
   };
-
-
 
   return (
     <div className="container mt-5">
@@ -87,7 +102,14 @@ export default function Home() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Başvuru Yap</button>
+        <button
+  type="submit"
+  className="btn btn-primary"
+  disabled={loading} // Yükleme esnasında butonu devre dışı bırakıyoruz
+>
+  {loading ? "Başvuru Yapılıyor..." : "Marka Başvurusu ile Koru"}
+</button>
+
       </form>
     </div>
   );
