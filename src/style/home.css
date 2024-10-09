@@ -1,45 +1,71 @@
-/* Sayfanın genel ayarları */
+/* Genel sayfa ayarları */
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f2f5;
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Form kapsayıcı */
+/* Header düzenlemeleri */
+.header-container {
+  display: flex;
+  flex-direction: column; /* Logoyu ve yazıyı dikey hizalayalım */
+  align-items: center; /* Ortaya al */
+  justify-content: center; /* Ortaya al */
+  padding: 20px;
+  background-color: #f0f2f5;
+}
+
+.header-title {
+  font-size: 28px; /* Yazı boyutunu artırdık */
+  color: #333;
+  margin-bottom: 10px; /* Logoyla başlık arasında boşluk */
+  text-align: center;
+}
+
+.header-logo {
+  width: 250px; /* Logonun genişliğini artırdık */
+  height: auto; /* Yükseklik otomatik olarak genişliğe orantılı */
+}
+
+/* Form ve başlık kapsayıcı - Formu küçültüp ortalayalım */
 .container {
   background-color: #fff;
-  padding: 40px;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Genişliği yüzde olarak ayarladık */
+  max-width: 600px; /* Maksimum genişliği 600px olarak belirledik */
+  margin: 40px auto; /* Sayfanın ortasında yer alması için */
 }
 
 /* Başlık stili */
 h1 {
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 20px;  /* Başlık ile form arasına daha fazla boşluk ekledik */
   text-align: center;
+  font-size: 28px;      /* Başlık boyutunu biraz küçülttük */
 }
 
-/* Form alanları */
+/* Form etiketleri */
 .form-label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-weight: bold;
+  font-size: 14px; /* Form etiketlerini biraz küçülttük */
 }
 
+/* Form kontrolleri */
 .form-control {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border-radius: 5px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 14px; /* Form kontrol boyutunu biraz küçülttük */
 }
 
 .form-control:focus {
@@ -49,21 +75,57 @@ h1 {
 
 /* Dosya yükleme input */
 .form-control[type="file"] {
-  padding: 3px;
+  padding: 8px;
 }
 
-/* Başvuru Butonu */
+/* Başvuru butonu */
 .btn-primary {
   width: 100%;
   background-color: #007bff;
   border: none;
-  padding: 10px;
+  padding: 12px;
   color: white;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 14px; /* Buton boyutunu biraz küçülttük */
 }
 
 .btn-primary:hover {
   background-color: #0056b3;
+}
+
+/* Footer stili - Sayfanın altına yerleşmesi için */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 40px 0;
+  text-align: center;
+  width: 100%;
+  margin-top: auto; /* Sayfanın altına yerleşmesi için */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+.social-media a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.social-media a:hover {
+  color: #007bff;
 }

@@ -1,5 +1,7 @@
-"use client";
+"use client";  // Bu direktifi en üste ekliyoruz
 
+import Header from '../components/Header'; // Header bileşenini import ettik
+import Footer from '../components/Footer'; // Footer bileşenini import ettik
 import { useState } from "react";
 import '../style/home.css'; // Home sayfası için özel stiller
 
@@ -8,7 +10,7 @@ export default function Home() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false); // Yükleme durumu için state
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -16,7 +18,7 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Başvuru başlıyor
+    setLoading(true);
 
     const formData = new FormData();
     formData.append("file", file);
@@ -55,62 +57,68 @@ export default function Home() {
     } catch (error) {
       alert(`Sunucuya erişilemedi: ${error.message}`);
     } finally {
-      setLoading(false); // İşlem bittiğinde yükleme durumu sıfırlanır
+      setLoading(false);
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Logo Koruma Başvurusu</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Ad</label>
-          <input
-            type="text"
-            className="form-control"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Soyad</label>
-          <input
-            type="text"
-            className="form-control"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">E-posta</label>
-          <input
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Logo Yükle</label>
-          <input
-            type="file"
-            className="form-control"
-            onChange={handleFileChange}
-            required
-          />
-        </div>
-        <button
-  type="submit"
-  className="btn btn-primary"
-  disabled={loading} // Yükleme esnasında butonu devre dışı bırakıyoruz
->
-  {loading ? "Başvuru Yapılıyor..." : "Marka Başvurusu ile Koru"}
-</button>
+    <div>
+      <Header /> {/* Header bileşenini çağırdık */}
 
-      </form>
+      <div className="container mt-5">
+        <h1 className="text-center mb-4">Logo Koruma Başvurusu</h1>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Ad</label>
+            <input
+              type="text"
+              className="form-control"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Soyad</label>
+            <input
+              type="text"
+              className="form-control"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">E-posta</label>
+            <input
+              type="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Logo Yükle</label>
+            <input
+              type="file"
+              className="form-control"
+              onChange={handleFileChange}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={loading}
+          >
+            {loading ? "Başvuru Yapılıyor..." : "Marka Başvurusu ile Koru"}
+          </button>
+        </form>
+      </div>
+
+      <Footer /> {/* Footer bileşenini çağırdık */}
     </div>
   );
 }
